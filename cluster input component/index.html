@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <script src = "angular.min.js"></script>
+    <script src = "app.js"></script>
+    <title>PeerAI demo</title>
+  </head>
+  <body ng-app = "cluster">
+      <h1> demo <h1>
+        <div class="row">
+          <div class = 'col-mod-3' ng-controller = "puller_clustertController">
+          <label>Center x coordinate:</label><br>
+
+          <input type="number" ng-model = "x_coordinate"><br>
+          <label >Center y coordinate:</label><br>
+          <input type="number" ng-model = "y_coordinate"><br>
+
+          <label>radius:</label><br>
+          <input type="number" ng-model = "radius"><br>
+
+          <label> Number of Points :</label><br>
+
+          <input type="number" ng-model = "number_of_points"><br>
+
+          <label > Percentage of noise :</label><br>
+
+          <input type="number" ng-model = "noise"><br>
+
+          <button type="submit" value="Submit" onclick = "savePuller()"> Submit</button><br>
+          <div>
+            Puller center:{{x_coordinate}} <br>{{y_coordinate}}<br>
+            puller radius:{{radius}}<br>
+            number of points:{{number_of_points}}<br>
+            puller noise:{{noise}}<br>
+            </div>
+        </div>
+        </div>
+
+
+        <div class = 'col-mod-3' >
+          <div ng-controller = "Penalizer_clustertController">
+          <label>Center x coordinate:</label><br>
+
+          <input type="number" ng-model = "x_coordinate"><br>
+          <label >Center y coordinate:</label><br>
+          <input type="number" ng-model = "y_coordinate"><br>
+
+          <label>radius:</label><br>
+          <input type="number" ng-model = "radius"><br>
+
+          <label> Number of Points :</label><br>
+
+          <input type="number" ng-model = "number_of_points"><br>
+
+          <label > Percentage of noise :</label><br>
+
+          <input type="number" ng-model = "noise"><br>
+
+          <button type="submit" value="Submit" onclick = "savePuller()" key-up =""> Submit</button><br>
+          <div>
+            Puller center:{{x_coordinate}} <br>{{y_coordinate}}<br>
+            puller radius:{{radius}}<br>
+            number of points:{{number_of_points}}<br>
+            puller noise:{{noise}}<br>
+            </div>
+        </div>
+        </div>
+
+        <div class = 'col-mod-3' >
+          <div ng-controller = "Large_margin_clusterController">
+          <label>Center x coordinate:</label><br>
+
+          <input type="number" ng-model = "x_coordinate"><br>
+          <label >Center y coordinate:</label><br>
+          <input type="number" ng-model = "y_coordinate"><br>
+
+          <label>radius:</label><br>
+          <input type="number" ng-model = "radius"><br>
+
+          <label> Number of Points :</label><br>
+
+          <input type="number" ng-model = "number_of_points"><br>
+
+          <label > Percentage of noise :</label><br>
+
+          <input type="number" ng-model = "noise"><br>
+
+          <button type="submit" value="Submit" onclick = "savePuller()"> Submit</button><br>
+          <div>
+            Puller center:{{x_coordinate}} <br>{{y_coordinate}}<br>
+            puller radius:{{radius}}<br>
+            number of points:{{number_of_points}}<br>
+            puller noise:{{noise}}<br>
+            </div>
+        </div>
+        </div>
+  </body>
+</html>
