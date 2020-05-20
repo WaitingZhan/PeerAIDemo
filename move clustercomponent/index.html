@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <script src = "angular.min.js"></script>
+    <script src = "app.js"></script>
+
+    <title></title>
+  </head>
+  <body ng-app="myApp">
+    <div ng-controller="myCtrl">
+      <div>
+          <button ng-click="myFunc()">creat </button>
+          <!-- <p data-ng-repeat="p in points">generate the points {{p}}</p><br>
+          <p  data-ng-repeat="p in points">points 1 x {{p[0]}}    {{ p[1]}}</p> -->
+      </div>
+
+      <div>
+          <button ng-click="myFunc2()">draw</button>
+      </div>
+
+      <div style="position: relative; height: 300px; width: 300px;background: pink;">
+          <!-- <p  data-ng-repeat="p in points">points 1 x {{p[0]}}    {{ p[1]}}</p> -->
+          <svg ng-attr-height="{{graph.height}}" ng-attr-width="{{graph.width}}">
+            <g ng-attr-fill="blue">
+              <circle data-ng-repeat = "p in points"
+                ng-attr-cx="{{p[0]}}"
+                ng-attr-cy="{{p[1]}}"
+                ng-attr-r="{{1}}">
+            </circle>
+            </g>
+
+       </svg>
+      <!-- <button ng-click="change()">Test</button> -->
+      </div>
+    </div>
+
+</html>
