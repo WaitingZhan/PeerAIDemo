@@ -1,12 +1,51 @@
 console.log('Hello TensorFlow');
-const my_points = [
-  { x_coordinate: 148,  y_coordinate: 55 ,  cluster : "puller",   label : 0},
-  { x_coordinate: 150,  y_coordinate: 45,   cluster:  "puller",   label : 0},
-  { x_coordinate: 166,  y_coordinate: 44,   cluster:  "puller",   label : 0},
-  { x_coordinate: 280,  y_coordinate: 221,  cluster:  "puller",   label : 1},
-  { x_coordinate: 348,  y_coordinate: 98,   cluster:  "puller",   label : 1},
-  { x_coordinate: 300,  y_coordinate: 128,  cluster:  "puller",   label : 1}
-];
+// const my_points = [
+//   { x_coordinate: 148,  y_coordinate: 55 ,  cluster : "puller",   label : 0},
+//   { x_coordinate: 150,  y_coordinate: 45,   cluster:  "puller",   label : 0},
+//   { x_coordinate: 166,  y_coordinate: 44,   cluster:  "puller",   label : 0},
+//   { x_coordinate: 280,  y_coordinate: 221,  cluster:  "puller",   label : 1},
+//   { x_coordinate: 348,  y_coordinate: 98,   cluster:  "puller",   label : 1},
+//   { x_coordinate: 300,  y_coordinate: 128,  cluster:  "puller",   label : 1}
+// ];
+
+function generateClusters(cx,cy,r,n_points,noise,cluster_name,p_lable){
+  let cluster_points = [];
+  var length = n_points;
+  var max_radius = r;
+  var max_angle = 2 * Math.PI;
+
+  const random_radius_Array =  Array(length).fill().map(() => Math.round(Math.random() * max_radius));
+  const random_angle_Array = Array(length).fill().map(() => Math.round(Math.random() * max_angle));
+
+  for(let i=0;i<length;i++){
+    var x = (random_radius_Array[i] * Math.cos(random_angle_Array[i])+ cx).toFixed(2);
+    var y = (random_radius_Array[i] * Math.sin(random_angle_Array[i])+ cy).toFixed(2);
+    var myArray = new Array();
+    cluster_points.push({x_coordinate: x,  y_coordinate: y ,  cluster : cluster_name,   label : p_lable})
+  }
+  return cluster_points
+}
+var classZero =
+  {puller: {cx: 148, cy: 45, radius : 7.5, npoint: 100 },
+  penalizer: {cx: 148, cy: 158, radius : 15, npoint: 400 },
+  large_margin: {cx: 7.5, cy: 128, radius : 7.5, npoint: 100 }}
+
+
+var classOne = {puller: {cx: 208, cy: 211, radius : 7.5, npoint: 100 },
+  penalizer: {cx: 208, cy: 98, radius : 15, npoint: 400 },
+  large_margin: {cx: 348.5, cy: 128, radius : 7.5, npoint: 100 }}
+
+//console.log(classZero.puller)
+puller_cluster_zero =generateClusters(classZero.puller.cx,classOne.puller.cy,classZero.puller.radius,classZero.puller.npoint,0,"puller",0)
+penalizer_cluster_zero =generateClusters(classZero.penalizer.cx,classOne.penalizer.cy,classZero.penalizer.radius,classZero.penalizer.npoint,0,"penalizer",0)
+large_margin_cluster_zero =generateClusters(classZero.large_margin.cx,classOne.large_margin.cy,classZero.large_margin.radius,classZero.large_margin.npoint,0,"large_margin",0)
+
+puller_cluster_One =generateClusters(classOne.puller.cx,classOne.puller.cy,classOne.puller.radius,classOne.puller.npoint,0,"puller",1)
+penalizer_cluster_One =generateClusters(classOne.penalizer.cx,classOne.penalizer.cy,classOne.penalizer.radius,classOne.penalizer.npoint,0,"penalizer",1)
+large_margin_cluster_One =generateClusters(classOne.large_margin.cx,classOne.large_margin.cy,classOne.large_margin.radius,classOne.large_margin.npoint,0,"puller",1)
+const my_points = puller_cluster_zero.concat(penalizer_cluster_zero.concat(large_margin_cluster_zero).concat(puller_cluster_One).concat(large_margin_cluster_One.concat(penalizer_cluster_One)))
+
+//console.log(my_points)
 const width = 356;//356;
 const height = 256;//256;
 
@@ -15,7 +54,7 @@ const input_x = [] //[x_coordinate,y_coordinate]
 const input_y = [] // label
 console.log("input y: ",input_y)
 for (let p of my_points){
-  input_x.push([p.x_coordinate,p.y_coordinate])
+  input_x.push([ parseFloat(p.x_coordinate), parseFloat(p.y_coordinate)])
   input_y.push(p.label)
 }
 console.log("input x: ",input_x)
