@@ -4,14 +4,15 @@ function generateClusters(cx,cy,r,n_points,noise,cluster_name,p_lable){
   let cluster_points = [];
   var length = n_points;
   var max_radius = r;
-  var max_angle = 2 * Math.PI;
+  var max_angle = 2 * 3.134;
 
-  const random_radius_Array =  Array(length).fill().map(() => Math.round(Math.random() * max_radius));
-  const random_angle_Array = Array(length).fill().map(() => Math.round(Math.random() * max_angle));
+
 
   for(let i=0;i<length;i++){
-    var x = (random_radius_Array[i] * Math.cos(random_angle_Array[i])+ cx).toFixed(2);
-    var y = (random_radius_Array[i] * Math.sin(random_angle_Array[i])+ cy).toFixed(2);
+    var random_radius = Math.random() * max_radius;
+    var random_angle = Math.random() * max_angle;
+    var x = (random_radius * Math.cos(random_angle)+ cx).toFixed(2);
+    var y = (random_radius * Math.sin(random_angle)+ cy).toFixed(2);
     var myArray = new Array();
     cluster_points.push({x_coordinate: x,  y_coordinate: y ,  cluster : cluster_name,   label : p_lable})
   }
@@ -216,14 +217,14 @@ console.log(test)
        .filter(function(d){return d.label == 0})
        .attr("cx",function(d){return d.x_coordinate})
        .attr("cy",function(d){return d.y_coordinate})
-       .attr("r",4)
+       .attr("r",2)
        .attr("fill","red")
   // draw label one
   classes.append("circle")
      .filter(function(d){return d.label == 1})
      .attr("cx",function(d){return d.x_coordinate})
      .attr("cy",function(d){return d.y_coordinate})
-     .attr("r",4)
+     .attr("r",2)
      .attr("fill","blue")
 
      svg.append("g")
