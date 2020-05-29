@@ -8,7 +8,7 @@ myApp.controller('myCtrl', ['$scope', function($scope) {
     $scope.radius = 10
     $scope.lable = 0
     $scope.cluster = 'puller';
-    $scope.classification = 1;
+  
 
     $scope.graph = {'width':300,'height':300};
     $scope.class_one_color = "blue";
