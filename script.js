@@ -1,12 +1,4 @@
 console.log('Hello TensorFlow');
-// const my_points = [
-//   { x_coordinate: 148,  y_coordinate: 55 ,  cluster : "puller",   label : 0},
-//   { x_coordinate: 150,  y_coordinate: 45,   cluster:  "puller",   label : 0},
-//   { x_coordinate: 166,  y_coordinate: 44,   cluster:  "puller",   label : 0},
-//   { x_coordinate: 280,  y_coordinate: 221,  cluster:  "puller",   label : 1},
-//   { x_coordinate: 348,  y_coordinate: 98,   cluster:  "puller",   label : 1},
-//   { x_coordinate: 300,  y_coordinate: 128,  cluster:  "puller",   label : 1}
-// ];
 
 function generateClusters(cx,cy,r,n_points,noise,cluster_name,p_lable){
   let cluster_points = [];
