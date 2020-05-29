@@ -4,7 +4,7 @@ function generateClusters(cx,cy,r,n_points,noise,cluster_name,p_lable){
   let cluster_points = [];
   var length = n_points;
   var max_radius = r;
-  var max_angle = 2 * 3.134;
+  var max_angle = 2 * Math.PI;
 
 
 
