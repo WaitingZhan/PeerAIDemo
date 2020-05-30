@@ -127,7 +127,7 @@ async function train() {
     const xyDataset = tf.data.zip({xs: xDataset, ys: yDataset}).batch(1024);
     for (let i = 0; i < 500; ++i) {
       await newmodel.fitDataset(xyDataset,{
-          epochs: 10,
+          epochs: 1,
           shuffle: true,});
         renderDecisionSurface(newmodel)
 
