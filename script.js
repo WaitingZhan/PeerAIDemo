@@ -10,7 +10,7 @@ function generateClusters(cx,cy,r,n_points,noise,cluster_name,p_lable){
   while(noise_set.size < Math.ceil(length*noise)){
     noise_set.add( Math.round(Math.random() * length))
   }
-  console.log(noise_set)
+  //console.log(noise_set)
 
 
   for(let i=0;i<length;i++){
@@ -70,9 +70,9 @@ X.print();
 // Y is the label we are tring to predict. In this casse, it's 0 and 1.
 const Y = tf.tensor(input_y);
 Y.print();
-console.log('x tensor: ',X);
-console.log('y tensor: ',Y);
-console.log(tf.getBackend());
+//console.log('x tensor: ',X);
+//console.log('y tensor: ',Y);
+//console.log(tf.getBackend());
 
 
 function generateTestData() {
@@ -93,7 +93,7 @@ function createFeedForwardModel() {
 
     var model = tf.sequential()
     model.add(tf.layers.dense({
-        units: 10,
+        units: 2,
         kernelInitializer: 'randomNormal',
         inputShape: 2,
         activation: 'relu',
@@ -110,10 +110,10 @@ function createFeedForwardModel() {
     //
     model.compile({
         optimizer: optimizer,
-        loss: "categoricalCrossentropy",
+        loss: "meanSquaredError",
         metrics: ['accuracy'],
-        //loss: custom_loss,
-        //shuffle: true
+
+        shuffle: true
     })
     return model
 }
@@ -130,14 +130,14 @@ async function train() {
     var xDataset = tf.data.array(trainDataFeatures);
     var yDataset = tf.data.array(trainDataLabel);
     const xyDataset = tf.data.zip({xs: xDataset, ys: yDataset}).batch(1024);
-
-    console.log(xyDataset);
-    for (let i = 1; i < 200; i += 50) {
-        await newmodel.fitDataset(xyDataset,{
-            epochs: 10,
-            shuffle: true,});
-        console.log(i);
+    for (let i = 0; i < 200; ++i) {
+      await newmodel.fitDataset(xyDataset,{
+          epochs: 10,
+          shuffle: true,});
+      if (i%5==0){
         renderDecisionSurface(newmodel)
+      }
+
     }
 
     }
@@ -151,11 +151,11 @@ async function renderDecisionSurface(model) {
 
     label  =tf.split(model.predict(testDataTensor),1,1)[0].arraySync();
 
-    console.log("predict:", label)
+    //console.log("predict:", label)
 
     var my_predict = []
     i = -1;
-    console.log(label[0])
+    //console.log(label[0])
     for (var y = 0; y <= height; y += 3) {
         for (var x = 0; x <= width; x += 3) {
             cur_label = label[++i]
@@ -163,7 +163,7 @@ async function renderDecisionSurface(model) {
             my_predict.push({x_coordinate: x, y_coordinate: y, label: cur_label})
           }
         }
-    console.log(my_predict.length)
+    //console.log(my_predict.length)
     drawPredict(my_predict)
 }
 function drawPredict(test){
@@ -171,7 +171,7 @@ function drawPredict(test){
       width = 436- margin.left - margin.right,
       height = 316 - margin.top - margin.bottom;
 
-console.log(test)
+//console.log(test)
   var svg = d3.select("#decision")
                .append("svg")
                 .attr("width", width + margin.left + margin.right)
@@ -218,12 +218,17 @@ console.log(test)
                              else if (0.9 < d.label && d.label <= 1) {
                                return "#80b3ff"
                              }
-
+                            else if (0.29 < d.label && d.label <= 0.3) {
+                              return "red"
+                            }
+                            else if (0.69 < d.label && d.label <= 0.7) {
+                              return "blue"
+                            }
 
                            })
                            .attr("transform",
                                  "translate( 0," + height + ")");
-               
+
   var classes =  svg.append("g")
                     .selectAll("*")
                    .data(my_points).enter();
