@@ -130,13 +130,12 @@ async function train() {
     var xDataset = tf.data.array(trainDataFeatures);
     var yDataset = tf.data.array(trainDataLabel);
     const xyDataset = tf.data.zip({xs: xDataset, ys: yDataset}).batch(1024);
-    for (let i = 0; i < 200; ++i) {
+    for (let i = 0; i < 500; ++i) {
       await newmodel.fitDataset(xyDataset,{
           epochs: 10,
           shuffle: true,});
-      if (i%5==0){
         renderDecisionSurface(newmodel)
-      }
+
 
     }
 
@@ -173,7 +172,7 @@ function drawPredict(test){
 
 //console.log(test)
   var svg = d3.select("#decision")
-               .append("svg")
+               //.append("svg")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
               .append("g")
