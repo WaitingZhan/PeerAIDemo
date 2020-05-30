@@ -65,14 +65,9 @@ for (let p of my_points){
 
 
 const X = tf.tensor(input_x);
-//console.log('x shape:', X.shape);
-X.print();
+
 // Y is the label we are tring to predict. In this casse, it's 0 and 1.
 const Y = tf.tensor(input_y);
-Y.print();
-//console.log('x tensor: ',X);
-//console.log('y tensor: ',Y);
-//console.log(tf.getBackend());
 
 
 function generateTestData() {
