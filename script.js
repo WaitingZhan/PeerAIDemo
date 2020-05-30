@@ -18,20 +18,19 @@ function generateClusters(cx,cy,r,n_points,noise,cluster_name,p_lable){
   }
   return cluster_points
 }
-var classZero =
-  {puller: {cx: 148, cy: 45, radius : 7.5, npoint: 100 },
-  penalizer: {cx: 148, cy: 158, radius : 15, npoint: 400 },
-  large_margin: {cx: 7.5, cy: 128, radius : 7.5, npoint: 100 }}
+var classZero ={puller: {cx: 148, cy: 45, radius : 7.5, npoint: 100 },
+                penalizer: {cx: 148, cy: 158, radius : 15, npoint: 400 },
+                large_margin: {cx: 7.5, cy: 128, radius : 7.5, npoint: 100 }}
 
 
 var classOne = {puller: {cx: 208, cy: 211, radius : 7.5, npoint: 100 },
-  penalizer: {cx: 208, cy: 98, radius : 15, npoint: 400 },
-  large_margin: {cx: 348.5, cy: 128, radius : 7.5, npoint: 100 }}
+                penalizer: {cx: 208, cy: 98, radius : 15, npoint: 400 },
+                large_margin: {cx: 348.5, cy: 128, radius : 7.5, npoint: 100 }}
 
 //console.log(classZero.puller)
-puller_cluster_zero =generateClusters(classZero.puller.cx,classOne.puller.cy,classZero.puller.radius,classZero.puller.npoint,0,"puller",0)
-penalizer_cluster_zero =generateClusters(classZero.penalizer.cx,classOne.penalizer.cy,classZero.penalizer.radius,classZero.penalizer.npoint,0,"penalizer",0)
-large_margin_cluster_zero =generateClusters(classZero.large_margin.cx,classOne.large_margin.cy,classZero.large_margin.radius,classZero.large_margin.npoint,0,"large_margin",0)
+puller_cluster_zero =generateClusters(classZero.puller.cx,classZero.puller.cy,classZero.puller.radius,classZero.puller.npoint,0,"puller",0)
+penalizer_cluster_zero =generateClusters(classZero.penalizer.cx,classZero.penalizer.cy,classZero.penalizer.radius,classZero.penalizer.npoint,0,"penalizer",0)
+large_margin_cluster_zero =generateClusters(classZero.large_margin.cx,classZero.large_margin.cy,classZero.large_margin.radius,classZero.large_margin.npoint,0,"large_margin",0)
 
 puller_cluster_One =generateClusters(classOne.puller.cx,classOne.puller.cy,classOne.puller.radius,classOne.puller.npoint,0,"puller",1)
 penalizer_cluster_One =generateClusters(classOne.penalizer.cx,classOne.penalizer.cy,classOne.penalizer.radius,classOne.penalizer.npoint,0,"penalizer",1)
@@ -158,8 +157,8 @@ async function renderDecisionSurface(model) {
     var my_predict = []
     i = -1;
     console.log(label[0])
-    for (var y = 0; y < height; y += 3) {
-        for (var x = 0; x < width; x += 3) {
+    for (var y = 0; y <= height; y += 3) {
+        for (var x = 0; x <= width; x += 3) {
             cur_label = label[++i]
             //console.log(i,cur_label)
             my_predict.push({x_coordinate: x, y_coordinate: y, label: cur_label})
@@ -170,8 +169,8 @@ async function renderDecisionSurface(model) {
 }
 function drawPredict(test){
   var margin = {top: 20, right: 20, bottom: 40, left: 60},
-      width = 500- margin.left - margin.right,
-      height = 500 - margin.top - margin.bottom;
+      width = 436- margin.left - margin.right,
+      height = 316 - margin.top - margin.bottom;
 
 console.log(test)
   var svg = d3.select("#decision")
@@ -188,27 +187,35 @@ console.log(test)
                     background.append("circle")
                            .filter(function(d){return 0 <= d.label && d.label < 0.5})
                            .attr("cx",function(d){return d.x_coordinate})
-                           .attr("cy",function(d){return d.y_coordinate})
+                           .attr("cy",function(d){return -d.y_coordinate})
                            .attr("r",2)
                            .attr("fill","pink")
+                           .attr("transform",
+                                 "translate( 0," + height + ")");
                    background.append("circle")
                                             .filter(function(d){return 0.5 < d.label && d.label <= 1})
                                             .attr("cx",function(d){return d.x_coordinate})
-                                            .attr("cy",function(d){return d.y_coordinate})
+                                            .attr("cy",function(d){return -d.y_coordinate})
                                             .attr("r",2)
                                             .attr("fill","lightblue")
+                                            .attr("transform",
+                                                  "translate( 0," + height + ")");
                   background.append("circle")
                                   .filter(function(d){return 0.299 <= d.label && d.label <=0.3})
                                   .attr("cx",function(d){return d.x_coordinate})
-                                  .attr("cy",function(d){return d.y_coordinate})
+                                  .attr("cy",function(d){return -d.y_coordinate})
                                   .attr("r",2)
                                   .attr("fill","red")
+                                  .attr("transform",
+                                        "translate( 0," + height + ")");
                  background.append("circle")
                                   .filter(function(d){return 0.699 <= d.label && d.label <= 0.7})
                                   .attr("cx",function(d){return d.x_coordinate})
-                                  .attr("cy",function(d){return d.y_coordinate})
+                                  .attr("cy",function(d){return -d.y_coordinate})
                                   .attr("r",2)
                                   .attr("fill","blue")
+                                  .attr("transform",
+                                        "translate( 0," + height + ")");
   var classes =  svg.append("g")
                     .selectAll("*")
                    .data(my_points).enter();
@@ -216,16 +223,20 @@ console.log(test)
   classes.append("circle")
        .filter(function(d){return d.label == 0})
        .attr("cx",function(d){return d.x_coordinate})
-       .attr("cy",function(d){return d.y_coordinate})
+       .attr("cy",function(d){return -d.y_coordinate})
        .attr("r",2)
        .attr("fill","red")
+       .attr("transform",
+             "translate( 0," + height + ")");
   // draw label one
   classes.append("circle")
      .filter(function(d){return d.label == 1})
      .attr("cx",function(d){return d.x_coordinate})
-     .attr("cy",function(d){return d.y_coordinate})
+     .attr("cy",function(d){return -d.y_coordinate})
      .attr("r",2)
      .attr("fill","blue")
+     .attr("transform",
+           "translate( 0," + height + ")");
 
      svg.append("g")
        .attr("transform",
@@ -254,7 +265,7 @@ console.log(test)
      svg.append("text")
        .attr("text-anchor", "end")
        .attr("transform", "rotate(-90)")
-       .attr("y", -margin.left+20)
+       .attr("y", -margin.left+10)
        .attr("x", -margin.top)
        .text("Y axis")
 
