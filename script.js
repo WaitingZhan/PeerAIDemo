@@ -28,14 +28,14 @@ function generateClusters(cx,cy,r,n_points,noise,cluster_name,p_lable){
   }
   return cluster_points
 }
-var classZero ={puller: {cx: 148, cy: 45, radius : 7.5, npoint: 100, noise: 0.5 },
-                penalizer: {cx: 148, cy: 158, radius : 15, npoint: 400,noise:0.5 },
-                large_margin: {cx: 7.5, cy: 128, radius : 7.5, npoint: 100,noise: 0.5 }}
+var classZero ={puller: {cx: 148, cy: 45, radius : 7.5, npoint: 100, noise: 0 },
+                penalizer: {cx: 148, cy: 158, radius : 15, npoint: 400,noise:0 },
+                large_margin: {cx: 7.5, cy: 128, radius : 7.5, npoint: 100,noise: 0 }}
 
 
-var classOne = {puller: {cx: 208, cy: 211, radius : 7.5, npoint: 100,noise:0.5 },
-                penalizer: {cx: 208, cy: 98, radius : 15, npoint: 400,noise:0.5 },
-                large_margin: {cx: 348.5, cy: 128, radius : 7.5, npoint: 100, noise:0.5 }}
+var classOne = {puller: {cx: 208, cy: 211, radius : 7.5, npoint: 100,noise:0 },
+                penalizer: {cx: 208, cy: 98, radius : 15, npoint: 400,noise:0 },
+                large_margin: {cx: 348.5, cy: 128, radius : 7.5, npoint: 100, noise:0 }}
 
 
 puller_cluster_zero = generateClusters(classZero.puller.cx,classZero.puller.cy,classZero.puller.radius,classZero.puller.npoint,classZero.puller.noise,"puller",0)
@@ -182,22 +182,86 @@ console.log(test)
   var background=  svg.selectAll("*")
                     .data(test).enter();
                       // draw label zero
-                    background.append("circle")
-                           .filter(function(d){return 0 <= d.label && d.label < 0.5})
+                  background.append("circle")
+                           .filter(function(d){return 0 <= d.label && d.label < 0.1})
                            .attr("cx",function(d){return d.x_coordinate})
                            .attr("cy",function(d){return -d.y_coordinate})
                            .attr("r",2)
-                           .attr("fill","pink")
+                           .attr("fill","#ff80b3")
                            .attr("transform",
                                  "translate( 0," + height + ")");
+                 background.append("circle")
+                          .filter(function(d){return 0.1 <= d.label && d.label < 0.2})
+                          .attr("cx",function(d){return d.x_coordinate})
+                          .attr("cy",function(d){return -d.y_coordinate})
+                          .attr("r",2)
+                          .attr("fill","#ff99c2")
+                          .attr("transform",
+                                "translate( 0," + height + ")");
+                background.append("circle")
+                         .filter(function(d){return 0.2 <= d.label && d.label < 0.3})
+                         .attr("cx",function(d){return d.x_coordinate})
+                         .attr("cy",function(d){return -d.y_coordinate})
+                         .attr("r",2)
+                         .attr("fill","#ffcce0")
+                         .attr("transform",
+                               "translate( 0," + height + ")");
+               background.append("circle")
+                        .filter(function(d){return 0.3 <= d.label && d.label < 0.4})
+                        .attr("cx",function(d){return d.x_coordinate})
+                        .attr("cy",function(d){return -d.y_coordinate})
+                        .attr("r",2)
+                        .attr("fill","#ffe6f0")
+                        .attr("transform",
+                              "translate( 0," + height + ")");
+                  background.append("circle")
+                              .filter(function(d){return 0.4 <= d.label && d.label < 0.5})
+                              .attr("cx",function(d){return d.x_coordinate})
+                              .attr("cy",function(d){return -d.y_coordinate})
+                              .attr("r",2)
+                              .attr("fill","#ffe6f0")
+                              .attr("transform",
+                                    "translate( 0," + height + ")");
+                  background.append("circle")
+                              .filter(function(d){return 0.5 < d.label && d.label <= 0.6})
+                              .attr("cx",function(d){return d.x_coordinate})
+                              .attr("cy",function(d){return -d.y_coordinate})
+                              .attr("r",2)
+                              .attr("fill","#e6f0ff")
+                              .attr("transform",
+                                    "translate( 0," + height + ")");
+                  background.append("circle")
+                             .filter(function(d){return 0.6 < d.label && d.label <= 0.7})
+                             .attr("cx",function(d){return d.x_coordinate})
+                             .attr("cy",function(d){return -d.y_coordinate})
+                             .attr("r",2)
+                             .attr("fill","#cce0ff")
+                             .attr("transform",
+                                   "translate( 0," + height + ")");
                    background.append("circle")
-                                            .filter(function(d){return 0.5 < d.label && d.label <= 1})
-                                            .attr("cx",function(d){return d.x_coordinate})
-                                            .attr("cy",function(d){return -d.y_coordinate})
-                                            .attr("r",2)
-                                            .attr("fill","lightblue")
-                                            .attr("transform",
-                                                  "translate( 0," + height + ")");
+                               .filter(function(d){return 0.7 < d.label && d.label <= 0.8})
+                               .attr("cx",function(d){return d.x_coordinate})
+                               .attr("cy",function(d){return -d.y_coordinate})
+                               .attr("r",2)
+                               .attr("fill","#b3d1ff")
+                               .attr("transform",
+                                     "translate( 0," + height + ")");
+                   background.append("circle")
+                              .filter(function(d){return 0.8 < d.label && d.label <= 0.9})
+                              .attr("cx",function(d){return d.x_coordinate})
+                              .attr("cy",function(d){return -d.y_coordinate})
+                              .attr("r",2)
+                              .attr("fill","#99c2ff")
+                              .attr("transform",
+                                    "translate( 0," + height + ")");
+                  background.append("circle")
+                             .filter(function(d){return 0.9 < d.label && d.label <= 1})
+                             .attr("cx",function(d){return d.x_coordinate})
+                             .attr("cy",function(d){return -d.y_coordinate})
+                             .attr("r",2)
+                             .attr("fill","#80b3ff")
+                             .attr("transform",
+                                   "translate( 0," + height + ")");
                   background.append("circle")
                                   .filter(function(d){return 0.299 <= d.label && d.label <=0.3})
                                   .attr("cx",function(d){return d.x_coordinate})
@@ -223,7 +287,7 @@ console.log(test)
        .attr("cx",function(d){return d.x_coordinate})
        .attr("cy",function(d){return -d.y_coordinate})
        .attr("r",2)
-       .attr("fill","red")
+       .attr("fill","#ff3385")
        .attr("transform",
              "translate( 0," + height + ")");
   // draw label one
@@ -232,7 +296,7 @@ console.log(test)
      .attr("cx",function(d){return d.x_coordinate})
      .attr("cy",function(d){return -d.y_coordinate})
      .attr("r",2)
-     .attr("fill","blue")
+     .attr("fill","#1a75ff")
      .attr("transform",
            "translate( 0," + height + ")");
 
