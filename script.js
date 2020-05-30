@@ -233,6 +233,7 @@ function drawPredict(test){
        .attr("cy",function(d){return -d.y_coordinate})
        .attr("r",2)
        .attr("fill","#ff3385")
+       .style("stroke","white")
        .attr("transform",
              "translate( 0," + height + ")");
   // draw label one
@@ -242,6 +243,7 @@ function drawPredict(test){
      .attr("cy",function(d){return -d.y_coordinate})
      .attr("r",2)
      .attr("fill","#1a75ff")
+     .style("stroke","white")
      .attr("transform",
            "translate( 0," + height + ")");
 
