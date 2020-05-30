@@ -8,7 +8,7 @@ myApp.controller('myCtrl', ['$scope', function($scope) {
     $scope.radius = 10
     $scope.lable = 0
     $scope.cluster = 'puller';
-  
+
 
     $scope.graph = {'width':300,'height':300};
     $scope.class_one_color = "blue";
@@ -20,8 +20,8 @@ myApp.controller('myCtrl', ['$scope', function($scope) {
       var max_radius = $scope.radius;
       var max_angle = 2 * Math.PI;
 
-      const random_radius_Array =  Array(length).fill().map(() => Math.round(Math.random() * max_radius));
-      const random_angle_Array = Array(length).fill().map(() => Math.round(Math.random() * max_angle));
+      const random_radius_Array =  Array(length).fill().map(() => Math.random() * max_radius);
+      const random_angle_Array = Array(length).fill().map(() => Math.random() * max_angle);
 
       for(let i=0;i<length;i++){
         var x = (random_radius_Array[i] * Math.cos(random_angle_Array[i])+ $scope.x_coordinate).toFixed(2);
