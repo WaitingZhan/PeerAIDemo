@@ -183,101 +183,47 @@ console.log(test)
                     .data(test).enter();
                       // draw label zero
                   background.append("circle")
-                           .filter(function(d){return 0 <= d.label && d.label < 0.1})
+                           //.filter(function(d){return 0 <= d.label && d.label < 0.1})
                            .attr("cx",function(d){return d.x_coordinate})
                            .attr("cy",function(d){return -d.y_coordinate})
                            .attr("r",2)
-                           .attr("fill","#ff80b3")
+                           .attr("fill",function(d){
+                             if(0 <= d.label && d.label < 0.1){
+                               return "#ff80b3"
+                             }
+                             else if (0.1 <= d.label && d.label < 0.2) {
+                               return "#ff99c2"
+                             }
+                             else if (0.2 <= d.label && d.label < 0.3) {
+                               return "#ffcce0"
+                             }
+                             else if (0.3 <= d.label && d.label < 0.4) {
+                               return "#ffe6f0"
+                             }
+                             else if (0.4 <= d.label && d.label < 0.5) {
+                               return "#ffe6f0"
+                             }
+                             else if (0.5 < d.label && d.label <= 0.6) {
+                               return "#e6f0ff"
+                             }
+                             else if (0.6 < d.label && d.label <= 0.7) {
+                               return "#cce0ff"
+                             }
+                             else if (0.7 < d.label && d.label <= 0.8) {
+                               return "#b3d1ff"
+                             }
+                             else if (0.8 < d.label && d.label <= 0.9) {
+                               return "#99c2ff"
+                             }
+                             else if (0.9 < d.label && d.label <= 1) {
+                               return "#80b3ff"
+                             }
+
+
+                           })
                            .attr("transform",
                                  "translate( 0," + height + ")");
-                 background.append("circle")
-                          .filter(function(d){return 0.1 <= d.label && d.label < 0.2})
-                          .attr("cx",function(d){return d.x_coordinate})
-                          .attr("cy",function(d){return -d.y_coordinate})
-                          .attr("r",2)
-                          .attr("fill","#ff99c2")
-                          .attr("transform",
-                                "translate( 0," + height + ")");
-                background.append("circle")
-                         .filter(function(d){return 0.2 <= d.label && d.label < 0.3})
-                         .attr("cx",function(d){return d.x_coordinate})
-                         .attr("cy",function(d){return -d.y_coordinate})
-                         .attr("r",2)
-                         .attr("fill","#ffcce0")
-                         .attr("transform",
-                               "translate( 0," + height + ")");
-               background.append("circle")
-                        .filter(function(d){return 0.3 <= d.label && d.label < 0.4})
-                        .attr("cx",function(d){return d.x_coordinate})
-                        .attr("cy",function(d){return -d.y_coordinate})
-                        .attr("r",2)
-                        .attr("fill","#ffe6f0")
-                        .attr("transform",
-                              "translate( 0," + height + ")");
-                  background.append("circle")
-                              .filter(function(d){return 0.4 <= d.label && d.label < 0.5})
-                              .attr("cx",function(d){return d.x_coordinate})
-                              .attr("cy",function(d){return -d.y_coordinate})
-                              .attr("r",2)
-                              .attr("fill","#ffe6f0")
-                              .attr("transform",
-                                    "translate( 0," + height + ")");
-                  background.append("circle")
-                              .filter(function(d){return 0.5 < d.label && d.label <= 0.6})
-                              .attr("cx",function(d){return d.x_coordinate})
-                              .attr("cy",function(d){return -d.y_coordinate})
-                              .attr("r",2)
-                              .attr("fill","#e6f0ff")
-                              .attr("transform",
-                                    "translate( 0," + height + ")");
-                  background.append("circle")
-                             .filter(function(d){return 0.6 < d.label && d.label <= 0.7})
-                             .attr("cx",function(d){return d.x_coordinate})
-                             .attr("cy",function(d){return -d.y_coordinate})
-                             .attr("r",2)
-                             .attr("fill","#cce0ff")
-                             .attr("transform",
-                                   "translate( 0," + height + ")");
-                   background.append("circle")
-                               .filter(function(d){return 0.7 < d.label && d.label <= 0.8})
-                               .attr("cx",function(d){return d.x_coordinate})
-                               .attr("cy",function(d){return -d.y_coordinate})
-                               .attr("r",2)
-                               .attr("fill","#b3d1ff")
-                               .attr("transform",
-                                     "translate( 0," + height + ")");
-                   background.append("circle")
-                              .filter(function(d){return 0.8 < d.label && d.label <= 0.9})
-                              .attr("cx",function(d){return d.x_coordinate})
-                              .attr("cy",function(d){return -d.y_coordinate})
-                              .attr("r",2)
-                              .attr("fill","#99c2ff")
-                              .attr("transform",
-                                    "translate( 0," + height + ")");
-                  background.append("circle")
-                             .filter(function(d){return 0.9 < d.label && d.label <= 1})
-                             .attr("cx",function(d){return d.x_coordinate})
-                             .attr("cy",function(d){return -d.y_coordinate})
-                             .attr("r",2)
-                             .attr("fill","#80b3ff")
-                             .attr("transform",
-                                   "translate( 0," + height + ")");
-                  background.append("circle")
-                                  .filter(function(d){return 0.299 <= d.label && d.label <=0.3})
-                                  .attr("cx",function(d){return d.x_coordinate})
-                                  .attr("cy",function(d){return -d.y_coordinate})
-                                  .attr("r",2)
-                                  .attr("fill","red")
-                                  .attr("transform",
-                                        "translate( 0," + height + ")");
-                 background.append("circle")
-                                  .filter(function(d){return 0.699 <= d.label && d.label <= 0.7})
-                                  .attr("cx",function(d){return d.x_coordinate})
-                                  .attr("cy",function(d){return -d.y_coordinate})
-                                  .attr("r",2)
-                                  .attr("fill","blue")
-                                  .attr("transform",
-                                        "translate( 0," + height + ")");
+               
   var classes =  svg.append("g")
                     .selectAll("*")
                    .data(my_points).enter();
